@@ -124,15 +124,21 @@ events.log  (bytes →)
 
 ## Screenshots
 
-> _Capture these from your own run and drop them in (e.g. in a `docs/` folder)._
+**1. Recovery log after a restart** — the index is rebuilt from `events.log` alone. First boot recovers `0`; after writing 3 events and restarting, it recovers `3`:
 
-**1. Recovery log after a restart** — showing the rebuilt count:
+![recovery log](docs/recovery.png)
 
-`![recovery log](docs/recovery.png)`
+**2. Reading a previously-written event after restart** (via Swagger UI at `/docs`) — a `200` with the stored event:
 
-**2. A read of a previously-written id after restart:**
+![read after restart](docs/read.png)
 
-`![read after restart](docs/read.png)`
+**3. Writing the events** (`POST /events`) — each returns the stamped `id` + `createdAt`:
+
+![post events](docs/post-events.png)
+
+**4. Reading an event back from the terminal** (`GET /events/:id`):
+
+![read via curl](docs/read-curl.png)
 
 ---
 
