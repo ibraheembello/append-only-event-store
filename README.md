@@ -29,6 +29,10 @@ On startup you'll see the recovery line:
 [server] Event store listening on http://localhost:3000
 ```
 
+### Interactive docs (Swagger UI)
+
+A browsable, click-to-test UI for every endpoint is served at **`http://localhost:3000/docs`**. This is a documentation layer only — it doesn't change any storage behaviour.
+
 ### Endpoints — curl for every route
 
 **`POST /events`** — store any JSON body. The server stamps `id` + `createdAt`, appends it, and returns `201` with the full event.
@@ -176,6 +180,7 @@ event-store/
 │   ├── routes/events.routes.ts        # route wiring
 │   ├── controllers/events.controller.ts
 │   ├── services/eventStore.service.ts # append-only log + byte-offset index + recovery
+│   ├── docs/openapi.ts                # OpenAPI spec served at /docs
 │   └── utils/id.ts                    # UUID v4
 ├── package.json
 ├── tsconfig.json

@@ -1,7 +1,9 @@
 import express, { Application } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import { EventStore } from './services/eventStore.service';
 import { EventsController } from './controllers/events.controller';
 import { buildEventsRouter } from './routes/events.routes';
+import { openapiSpec } from './docs/openapi';
 
 export const createApp = (store: EventStore): Application => {
   const app = express();
@@ -19,6 +21,9 @@ export const createApp = (store: EventStore): Application => {
     }
     next();
   });
+
+  // Swagger UI for manual endpoint testing (documentation layer only).
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpec));
 
   const controller = new EventsController(store);
   app.use('/', buildEventsRouter(controller));
